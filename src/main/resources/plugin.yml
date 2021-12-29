@@ -1,0 +1,39 @@
+name: Zabon
+version: '${project.version}'
+main: cucumbersaurus.zabon.Zabon
+api-version: 1.18
+authors: [ cucumbersaurus ]
+description: test&zabon
+
+commands:
+  wasans:
+    description: 와! 샌즈
+    usage: 와! 샌즈
+    aliases: [와샌즈]
+    permission-message: 서버장한테 op 달라고 해
+    permission: zabon.wasans
+  effectmenu:
+    description: 이펙트 창
+    usage: /effectmenu
+    permission: zabon.effectmenu
+  guitest:
+    description: gui 테스트하기
+    usage: /guitest
+    permission: zabon.guitest
+  playerlocation:
+    usage: /playerlocation,/pl
+    aliases: [prl]
+    permission: zabon.playerlocation
+  zabon:
+    description: 재산 관리 창 열기
+    usage: /zabon, /zb
+    aliases: [zb]
+    permission: zabon.zabon
+permissions:
+  zabon.*:
+    default: op
+    children:
+      zabon.wasans: true
+      zabon.effectmenu: true
+  zabon.playerlocation:
+    default: true
