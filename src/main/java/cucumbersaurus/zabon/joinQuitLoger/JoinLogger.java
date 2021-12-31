@@ -53,6 +53,10 @@ public class JoinLogger {
 
     public void joinAndesite(@NotNull PlayerJoinEvent e){
         e.setJoinMessage(ChatColor.GOLD+"데스"+ChatColor.YELLOW+"가 \"데스는 데스데스\"를 시전하기 위해 서버에 등장했습니다.");
+        e.setJoinMessage((ChatColor.YELLOW+"그래픽카드가 세 자리수인 "+ChatColor.GOLD+"데스"+ChatColor.YELLOW+"는 불만을 표하며 서버에 들어왔습니다."));
+        e.setJoinMessage(ChatColor.YELLOW+"평화롭게 건축이나 하고싶은 "+ChatColor.GOLD+"데스"+ChatColor.YELLOW+"가 건축대회 개최를 주장하기 위해 서버에 나타났습니다.");
+
+
 
     }
 
