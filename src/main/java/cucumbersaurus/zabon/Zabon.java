@@ -7,6 +7,7 @@ import cucumbersaurus.zabon.commands.effectmenu.EffectCommands;
 import cucumbersaurus.zabon.eventListener.GuiListener;
 import cucumbersaurus.zabon.eventListener.QuitEventListener;
 import cucumbersaurus.zabon.zabon.ZabonGuiOpenCommand;
+import cucumbersaurus.zabon.zabon.bank.BankGuiOpenCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 import cucumbersaurus.zabon.eventListener.JoinEventListener;
 
@@ -32,6 +33,7 @@ public final class Zabon extends JavaPlugin {
         getCommand("playerlocation").setExecutor(new GetPlayerLocation());
         getCommand("effectmenu").setExecutor(new EffectCommands());
         getCommand("zabon").setExecutor(new ZabonGuiOpenCommand());
+        getCommand("bank").setExecutor(new BankGuiOpenCommand());
     }
 
     private void registerEvents(){

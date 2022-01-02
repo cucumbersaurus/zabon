@@ -29,6 +29,11 @@ commands:
     usage: /zabon, /zb
     aliases: [zb]
     permission: zabon.zabon
+  bank:
+    description: 은행 창 열기
+    usage: /bank, /bk
+    aliases: [bk]
+    permission: zabon.bank
 permissions:
   zabon.*:
     default: op
@@ -36,4 +41,8 @@ permissions:
       zabon.wasans: true
       zabon.effectmenu: true
   zabon.playerlocation:
+    default: true
+  zabon.zabon:
+    default: true
+  zabon.bank:
     default: true

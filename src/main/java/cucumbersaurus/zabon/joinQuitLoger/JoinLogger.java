@@ -15,7 +15,7 @@ public class JoinLogger {
 
     private int getRandom(int max){
         int rd = random.nextInt();
-        rd %= 5;
+        rd %= max;
         rd = rd < 0 ? rd * -1 : rd;
         return rd + 1;
     }
