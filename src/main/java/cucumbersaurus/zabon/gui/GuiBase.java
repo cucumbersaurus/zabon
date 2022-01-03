@@ -38,7 +38,7 @@ public abstract class GuiBase {
         protected void setItem(String name, List<String> lore, @NotNull Material m, int amount, int slot, String value, boolean isGlow) {
             ItemStack item = new ItemStack(m,amount);
             ItemMeta meta = item.getItemMeta();
-            meta.setDisplayName(name);
+            if(name != null) meta.setDisplayName(name);
             if(lore != null) meta.setLore(lore);
             if(isGlow) {
                 meta.addEnchant(Enchantment.LURE, 1, false);

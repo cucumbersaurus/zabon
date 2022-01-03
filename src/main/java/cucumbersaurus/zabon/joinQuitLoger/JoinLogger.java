@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.jetbrains.annotations.NotNull;
 
+import java.awt.*;
 import java.util.Random;
 
 public class JoinLogger {
@@ -52,7 +53,7 @@ public class JoinLogger {
     }
 
     public void joinAndesite(@NotNull PlayerJoinEvent e){
-        int rd=getRandom(3);
+        int rd=getRandom(4);
 
         switch (rd) {
             case 1:
@@ -64,6 +65,8 @@ public class JoinLogger {
             case 3:
                 e.setJoinMessage(ChatColor.YELLOW + "평화롭게 건축이나 하고싶은 " + ChatColor.GOLD + "데스" + ChatColor.YELLOW + "가 건축대회 개최를 주장하기 위해 서버에 나타났습니다.");
                 break;
+            case 4:
+                e.setJoinMessage(ChatColor.YELLOW + "용암전문잠수부 "+ ChatColor.GOLD + "안데스"+ChatColor.YELLOW + "가 나타났습니다.");
             default:
                 break;
         }

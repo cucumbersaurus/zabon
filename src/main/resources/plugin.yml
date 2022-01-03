@@ -28,12 +28,12 @@ commands:
     description: 재산 관리 창 열기
     usage: /zabon, /zb
     aliases: [zb]
-    permission: zabon.zabon
+    permission: zabon.system.zabon
   bank:
     description: 은행 창 열기
     usage: /bank, /bk
     aliases: [bk]
-    permission: zabon.bank
+    permission: zabon.system.bank
 permissions:
   zabon.*:
     default: op
@@ -42,7 +42,8 @@ permissions:
       zabon.effectmenu: true
   zabon.playerlocation:
     default: true
-  zabon.zabon:
+  zabon.system.*:
     default: true
-  zabon.bank:
-    default: true
+    children:
+      zabon.system.zabon: true
+      zabon.system.bank: true

@@ -11,10 +11,17 @@ import org.jetbrains.annotations.NotNull;
 public class GetPlayerLocation implements CommandExecutor {
 
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, String label, String[] args){
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args){
 
-        Player player = (Player) sender;
-        Location playerLocation = player.getLocation();
+        Player p = (Player) sender;
+
+        if(args.length!=0) {Player getP = Bukkit.getPlayer(args[0]);
+            if(getP!=null){
+                p=getP;
+            }
+        }
+
+        Location playerLocation = p.getLocation();
 
         String playerLocationWorld = playerLocation.getWorld().toString();
         int playerLocationX = (int)playerLocation.getX();
@@ -31,7 +38,7 @@ public class GetPlayerLocation implements CommandExecutor {
             playerLocationWorld="엔드";
         }
 
-        Bukkit.broadcastMessage(player.getName()+"(은)는 "+playerLocationWorld+"의 x="+playerLocationX+", y="+playerLocationY+", z="+playerLocationZ+"에 있습니다.");
+        Bukkit.broadcastMessage(p.getName()+"(은)는 "+playerLocationWorld+"의 x="+playerLocationX+", y="+playerLocationY+", z="+playerLocationZ+"에 있습니다.");
 
 
         return true;
