@@ -7,7 +7,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.jetbrains.annotations.NotNull;
 
-import java.awt.*;
 import java.util.Random;
 
 public class JoinLogger {
@@ -74,7 +73,19 @@ public class JoinLogger {
     }
 
     public void joinSeo_m(@NotNull PlayerJoinEvent e){
-        e.setJoinMessage(ChatColor.YELLOW+"마이크 귀찮아서 안들고온 "+ChatColor.AQUA+"서엠"+ChatColor.YELLOW+"이 나타났습니다.");
+        int rd=getRandom(4);
+
+        switch (rd){
+            case 1:
+                e.setJoinMessage(ChatColor.YELLOW+"마이크 귀찮아서 안들고온 "+ChatColor.AQUA+"서엠"+ChatColor.YELLOW+"이 나타났습니다.");
+                break;
+            case 2:
+                e.setJoinMessage(ChatColor.YELLOW+"인클저격수 "+ChatColor.AQUA+"서엠"+ChatColor.YELLOW+"이 나타났습니다.");
+                break;
+            default:
+                break;
+        }
+
         alertJoin();
     }
 

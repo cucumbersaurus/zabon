@@ -1,6 +1,7 @@
 package cucumbersaurus.zabon.commands.effectmenu;
 
 import cucumbersaurus.zabon.gui.GuiBase;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
@@ -36,7 +37,11 @@ public class EffectGui extends GuiBase {
                 break;
             case "Flame":
                 p.getWorld().spawnParticle(Particle.FLAME, p.getLocation(), 170, 1.5, 1.5, 1.5);
-                    p.playSound(p.getLocation(), Sound.ENTITY_BLAZE_SHOOT, 0.6f, 1);
+
+                for(Player all : Bukkit.getOnlinePlayers()){
+                    all.playSound(p.getLocation(), Sound.ENTITY_BLAZE_SHOOT, 0.6f, 1);
+                }
+
                 p.sendMessage("화염 소환!");
                 break;
             default:

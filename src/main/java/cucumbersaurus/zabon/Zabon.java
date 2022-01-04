@@ -11,6 +11,8 @@ import cucumbersaurus.zabon.zabon.bank.BankGuiOpenCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 import cucumbersaurus.zabon.eventListener.JoinEventListener;
 
+import java.util.Objects;
+
 public final class Zabon extends JavaPlugin {
 
     @Override
@@ -28,12 +30,12 @@ public final class Zabon extends JavaPlugin {
     }
 
     private void getCommands(){
-        getCommand("wasans").setExecutor(new Wasans());
-        getCommand("guitest").setExecutor(new GuiCommands());
-        getCommand("playerlocation").setExecutor(new GetPlayerLocation());
-        getCommand("effectmenu").setExecutor(new EffectCommands());
-        getCommand("zabon").setExecutor(new ZabonGuiOpenCommand());
-        getCommand("bank").setExecutor(new BankGuiOpenCommand());
+        Objects.requireNonNull(getCommand("wasans")).setExecutor(new Wasans());
+        Objects.requireNonNull(getCommand("guitest")).setExecutor(new GuiCommands());
+        Objects.requireNonNull(getCommand("playerlocation")).setExecutor(new GetPlayerLocation());
+        Objects.requireNonNull(getCommand("effectmenu")).setExecutor(new EffectCommands());
+        Objects.requireNonNull(getCommand("zabon")).setExecutor(new ZabonGuiOpenCommand());
+        Objects.requireNonNull(getCommand("bank")).setExecutor(new BankGuiOpenCommand());
     }
 
     private void registerEvents(){
