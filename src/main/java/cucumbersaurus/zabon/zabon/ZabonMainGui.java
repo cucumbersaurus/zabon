@@ -10,7 +10,7 @@ import java.util.Arrays;
 
 public class ZabonMainGui extends GuiBase {
 
-    public ZabonMainGui(@NotNull Player p, int guiSize, String guiName) { super(p, 54, "메인 메뉴"); }
+    public ZabonMainGui(@NotNull Player p) { super(p, 54, "메인 메뉴"); }
 
     @Override
     protected void init() {

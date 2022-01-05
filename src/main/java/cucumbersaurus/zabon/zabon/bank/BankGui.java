@@ -10,7 +10,7 @@ import java.util.Arrays;
 
 public class BankGui extends GuiBase {
 
-    public BankGui(@NotNull Player p, int guiSize, String guiName) { super(p, 54, "은행"); }
+    public BankGui(@NotNull Player p) { super(p, 54, "은행"); }
 
     @Override
     protected void init() {

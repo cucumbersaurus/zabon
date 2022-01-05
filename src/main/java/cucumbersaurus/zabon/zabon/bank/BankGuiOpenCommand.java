@@ -13,7 +13,7 @@ public class BankGuiOpenCommand implements CommandExecutor {
         if(sender instanceof Player){
 
             Player p = (Player) sender;
-            new BankGui(p, 54, "은행");
+            new BankGui(p);
 
         }
         else{

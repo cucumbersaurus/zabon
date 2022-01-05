@@ -13,7 +13,7 @@ public class ZabonGuiOpenCommand implements CommandExecutor {
         if(sender instanceof Player){
 
             Player p = (Player) sender;
-            new ZabonMainGui(p, 54, "자산");
+            new ZabonMainGui(p);
             return true;
 
         }

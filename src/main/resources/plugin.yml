@@ -20,6 +20,10 @@ commands:
     description: gui 테스트하기
     usage: /guitest
     permission: zabon.guitest
+  add:
+    description: file test
+    usage: /add
+    permission: zabon.add
   playerlocation:
     usage: /playerlocation,/pl
     aliases: [prl]

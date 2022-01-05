@@ -4,12 +4,14 @@ import cucumbersaurus.zabon.commands.GetPlayerLocation;
 import cucumbersaurus.zabon.commands.GuiCommands;
 import cucumbersaurus.zabon.commands.Wasans;
 import cucumbersaurus.zabon.commands.effectmenu.EffectCommands;
+import cucumbersaurus.zabon.commands.fileTest.FileTest;
+import cucumbersaurus.zabon.commands.fileTest.FileTestCommand;
 import cucumbersaurus.zabon.eventListener.GuiListener;
+import cucumbersaurus.zabon.eventListener.JoinEventListener;
 import cucumbersaurus.zabon.eventListener.QuitEventListener;
 import cucumbersaurus.zabon.zabon.ZabonGuiOpenCommand;
 import cucumbersaurus.zabon.zabon.bank.BankGuiOpenCommand;
 import org.bukkit.plugin.java.JavaPlugin;
-import cucumbersaurus.zabon.eventListener.JoinEventListener;
 
 import java.util.Objects;
 
@@ -18,15 +20,19 @@ public final class Zabon extends JavaPlugin {
     @Override
     public void onEnable() {
         // Plugin startup logic
+        getLogger().info("plugin loading");
+
         getCommands();
         registerEvents();
-        getLogger().info("start");
+        file();
+
+        getLogger().info("plugin enabled");
     }
 
     @Override
     public void onDisable() {
         // Plugin shutdown logic
-        getLogger().info("end");
+        getLogger().info("plugin disabled");
     }
 
     private void getCommands(){
@@ -36,12 +42,21 @@ public final class Zabon extends JavaPlugin {
         Objects.requireNonNull(getCommand("effectmenu")).setExecutor(new EffectCommands());
         Objects.requireNonNull(getCommand("zabon")).setExecutor(new ZabonGuiOpenCommand());
         Objects.requireNonNull(getCommand("bank")).setExecutor(new BankGuiOpenCommand());
+        Objects.requireNonNull(getCommand("add")).setExecutor(new FileTestCommand());
     }
 
     private void registerEvents(){
         getServer().getPluginManager().registerEvents(new JoinEventListener(), this);
         getServer().getPluginManager().registerEvents(new QuitEventListener(), this);
         getServer().getPluginManager().registerEvents(new GuiListener(), this);
+    }
+
+    private void file(){
+        FileTest.setPlugin(this);
+        FileTest.makeFile(FileTest.f);
+        FileTest.mapToFile(FileTest.f, FileTestCommand.map);
+        FileTest.fileToMap(FileTest.f,FileTestCommand.map);
+
     }
 
 }
