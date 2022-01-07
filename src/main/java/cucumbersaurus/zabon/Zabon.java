@@ -11,6 +11,8 @@ import cucumbersaurus.zabon.eventListener.JoinEventListener;
 import cucumbersaurus.zabon.eventListener.QuitEventListener;
 import cucumbersaurus.zabon.zabon.ZabonGuiOpenCommand;
 import cucumbersaurus.zabon.zabon.bank.BankGuiOpenCommand;
+import cucumbersaurus.zabon.zabon.tradeItem.addTradeIttem.AddTradeItemGuiCommand;
+import cucumbersaurus.zabon.zabon.tradeItem.tradeGui.TradeGuiCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Objects;
@@ -24,7 +26,7 @@ public final class Zabon extends JavaPlugin {
 
         getCommands();
         registerEvents();
-        file();
+        loadFile();
 
         getLogger().info("plugin enabled");
     }
@@ -32,6 +34,7 @@ public final class Zabon extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+        saveFile();
         getLogger().info("plugin disabled");
     }
 
@@ -43,6 +46,8 @@ public final class Zabon extends JavaPlugin {
         Objects.requireNonNull(getCommand("zabon")).setExecutor(new ZabonGuiOpenCommand());
         Objects.requireNonNull(getCommand("bank")).setExecutor(new BankGuiOpenCommand());
         Objects.requireNonNull(getCommand("add")).setExecutor(new FileTestCommand());
+        Objects.requireNonNull(getCommand("trade")).setExecutor(new TradeGuiCommand());
+        Objects.requireNonNull(getCommand("additem")).setExecutor(new AddTradeItemGuiCommand());
     }
 
     private void registerEvents(){
@@ -51,12 +56,15 @@ public final class Zabon extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new GuiListener(), this);
     }
 
-    private void file(){
+    private void loadFile(){
         FileTest.setPlugin(this);
         FileTest.makeFile(FileTest.f);
         FileTest.mapToFile(FileTest.f, FileTestCommand.map);
-        FileTest.fileToMap(FileTest.f,FileTestCommand.map);
 
+    }
+
+    private void saveFile(){
+        FileTest.fileToMap(FileTest.f, FileTestCommand.map);
     }
 
 }

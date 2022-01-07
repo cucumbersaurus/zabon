@@ -46,11 +46,8 @@ public class FileTest {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                finally {
-
-                }
             }
-        },20*300,20*300);
+        },0,20*3600);
     }
 
     public static void fileToMap(File f, HashMap<UUID, Integer> map){

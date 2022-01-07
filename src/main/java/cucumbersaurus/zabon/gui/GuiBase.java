@@ -1,9 +1,5 @@
 package cucumbersaurus.zabon.gui;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -16,11 +12,15 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public abstract class GuiBase {
 
-    private static  final Map<Player,GuiBase> guiMap = new HashMap<Player, GuiBase>();
-    private Inventory inv;
-    private Map<Integer,String> slotMap;
+    protected static  final Map<Player,GuiBase> guiMap = new HashMap<Player, GuiBase>();
+    protected Inventory inv;
+    protected Map<Integer,String> slotMap;
 
     public static GuiBase getGUI(Player p) { return guiMap.getOrDefault(p, null); }
 
@@ -45,6 +45,10 @@ public abstract class GuiBase {
                 meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
             }
             item.setItemMeta(meta);
+            slotMap.put(slot, value);
+            inv.setItem(slot, item);
+        }
+        protected void setItem(ItemStack item, int slot, String value){
             slotMap.put(slot, value);
             inv.setItem(slot, item);
         }

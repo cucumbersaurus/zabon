@@ -38,6 +38,16 @@ commands:
     usage: /bank, /bk
     aliases: [bk]
     permission: zabon.system.bank
+  trade:
+    description: 거래 창 열기
+    usage: /trade, /tr
+    aliases: [tr]
+    permission: zabon.system.trade
+  additem:
+    description: 거래 아이템 추가
+    usage: /additem, ai
+    aliases: [ai]
+    permission: zabon.sysetm.additem
 permissions:
   zabon.*:
     default: op
@@ -51,3 +61,5 @@ permissions:
     children:
       zabon.system.zabon: true
       zabon.system.bank: true
+      zabon.system.trade: true
+      zabon.system.additem: true
