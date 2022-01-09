@@ -13,7 +13,7 @@ public class ZabonMainGui extends GuiBase {
     public ZabonMainGui(@NotNull Player p) { super(p, 54, "메인 메뉴"); }
 
     @Override
-    protected void init() {
+    protected void init(@NotNull Player p) {
 
         for(int i = 0;i < 54;i++){
             setItem(" ", null ,Material.LIGHT_BLUE_STAINED_GLASS_PANE,1, i,"zabon.background",false);

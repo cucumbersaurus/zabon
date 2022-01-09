@@ -26,7 +26,7 @@ public final class Zabon extends JavaPlugin {
 
         getCommands();
         registerEvents();
-        loadFile();
+        //loadFile();
 
         getLogger().info("plugin enabled");
     }

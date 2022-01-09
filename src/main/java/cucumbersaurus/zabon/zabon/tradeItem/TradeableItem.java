@@ -9,13 +9,13 @@ import java.util.Arrays;
 public class TradeableItem {
 
     private double itemPrice;
-    private int uploadTime;
-    private int lastingTime;
+    private String uploadTime;
+    private String lastingTime;
     private String playerName;
     private ItemStack item;
 
 
-    public TradeableItem(ItemStack item, double itemPrice, int tradeTime, int UploadTime, String playerName) {
+    public TradeableItem(ItemStack item, double itemPrice, String tradeTime, String UploadTime, String playerName) {
         this.itemPrice = itemPrice;
         this.uploadTime = tradeTime;
         this.lastingTime = UploadTime;
@@ -39,19 +39,19 @@ public class TradeableItem {
         }
     }
 
-    public int getUploadTime() {
+    public String getUploadTime() {
         return uploadTime;
     }
 
-    public void setUploadTime(int uploadTime) {
+    public void setUploadTime(String uploadTime) {
         this.uploadTime = uploadTime;
     }
 
-    public int getLastingTime() {
+    public String getLastingTime() {
         return lastingTime;
     }
 
-    public void setLastingTime(int lastingTime) {
+    public void setLastingTime(String lastingTime) {
         this.lastingTime = lastingTime;
     }
 
@@ -82,14 +82,14 @@ public class TradeableItem {
 
     public void reset(){
         this.itemPrice = 0;
-        this.uploadTime = 0;
-        this.lastingTime = 0;
+        this.uploadTime = "null";
+        this.lastingTime = "null";
         this.playerName = "";
         this.item =  new ItemStack(Material.STRUCTURE_VOID);
     }
 
     public TradeableItem clone(){
-        TradeableItem tradeableItem = new TradeableItem(new ItemStack(Material.STRUCTURE_VOID), 0, 0, 0, "null");
+        TradeableItem tradeableItem = new TradeableItem(new ItemStack(Material.STRUCTURE_VOID), 0, "null", "null", "null");
         tradeableItem.setItem(this.getItem());
         tradeableItem.setItemPrice(this.itemPrice);
         tradeableItem.setUploadTime(this.uploadTime);

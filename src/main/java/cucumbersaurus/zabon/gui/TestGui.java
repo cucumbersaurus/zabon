@@ -14,7 +14,7 @@ public class TestGui extends GuiBase{
     public TestGui(@NotNull Player p, int guiSize, String guiName) { super(p, 9, "gui테스트"); }
 
     @Override
-    protected void init() {
+    protected void init(@NotNull Player p) {
 setItem("테스트 버튼", Arrays.asList("","일단 눌러봐"), Material.DIAMOND, 5, 0, "test", true);
     }
 

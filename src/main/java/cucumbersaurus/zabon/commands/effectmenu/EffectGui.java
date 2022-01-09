@@ -17,7 +17,7 @@ public class EffectGui extends GuiBase {
     public EffectGui(@NotNull Player p, int guiSize, String guiName) { super(p, 27, "이펙트 선택"); }
 
     @Override
-    protected void init() {
+    protected void init(@NotNull Player p) {
         setItem("번개 소환", Arrays.asList("현재 위치에 번개 효과를 소환합니다."), Material.BLAZE_ROD, 1, 9+2, "Lightning", false);
         setItem("화염 소환", Arrays.asList("현재 위치에 화염 입자를 소환합니다"), Material.BLAZE_POWDER, 1, 9+6, "Flame", false);
     }

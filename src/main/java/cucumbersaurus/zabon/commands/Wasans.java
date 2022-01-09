@@ -22,7 +22,7 @@ public class Wasans implements CommandExecutor {
 
             ItemMeta sansBoneItemMeta= sansBone.getItemMeta();
             sansBoneItemMeta.setDisplayName("와! 샌즈!");
-            sansBoneItemMeta.setLore(Arrays.asList("그냥 샌즈의 뺘다."));
+            sansBoneItemMeta.setLore(Arrays.asList("그냥 샌즈의 뼈다."));
             sansBone.setItemMeta(sansBoneItemMeta);
 
             Inventory playerInventory = player.getInventory();

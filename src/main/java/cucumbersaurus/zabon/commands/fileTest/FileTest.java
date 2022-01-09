@@ -47,7 +47,7 @@ public class FileTest {
                     e.printStackTrace();
                 }
             }
-        },0,20*3600);
+        },0,20*300);
     }
 
     public static void fileToMap(File f, HashMap<UUID, Integer> map){

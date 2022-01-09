@@ -73,7 +73,7 @@ public class JoinLogger {
     }
 
     public void joinSeo_m(@NotNull PlayerJoinEvent e){
-        int rd=getRandom(4);
+        int rd=getRandom(2);
 
         switch (rd){
             case 1:

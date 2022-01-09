@@ -3,6 +3,7 @@ package cucumbersaurus.zabon.zabon.tradeItem.addTradeIttem;
 import cucumbersaurus.zabon.gui.GuiBase;
 import cucumbersaurus.zabon.zabon.tradeItem.TradeItemList;
 import cucumbersaurus.zabon.zabon.tradeItem.TradeableItem;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -11,6 +12,7 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Objects;
@@ -19,12 +21,12 @@ public class AddTradeItemGui extends GuiBase{
 
     public static final HashMap<Player, Boolean> isWaitingAddItem = new HashMap<>();
     public AddTradeItemGui(@NotNull Player p) { super(p, 54, "거래 가능한 이이템 추가하기"); }
-    private ItemStack item = new ItemStack(Material.STRUCTURE_VOID);
-    private TradeableItem tradeableItem = new TradeableItem(item, 0, 0, 0, "null");
+    private final ItemStack item = new ItemStack(Material.STRUCTURE_VOID);
+    private final TradeableItem tradeableItem = new TradeableItem(item, 0, "null", "null", "null");
     private boolean isUploaded = false;
 
     @Override
-    protected void init() {
+    protected void init(@NotNull Player p) {
 
         for(int i = 0;i < 54;i++){
             setItem(" ", null ,Material.WHITE_STAINED_GLASS_PANE,1, i,"zabon.background",false);
@@ -47,8 +49,11 @@ public class AddTradeItemGui extends GuiBase{
         String btn = getValue(e.getRawSlot());
 
         if(Objects.equals(e.getClickedInventory(), p.getInventory())){
-            if(isWaitingAddItem.get(p)){
+            if(isWaitingAddItem.get(p)&&isWaitingAddItem.get(p)!=null){
 
+                if(e.getCurrentItem()==null){
+                    return;
+                }
                 alertYes(p);
                 this.tradeableItem.setItem(Objects.requireNonNull(e.getCurrentItem()).clone());
                 this.tradeableItem.setPlayerName(p.getName());
@@ -75,11 +80,11 @@ public class AddTradeItemGui extends GuiBase{
                 //아이템 가격 -10
                 if(!isUploaded){
                     alertNo(p);
-                    p.sendMessage("아이템을 먼저 선택 해 주세요!");
+                    p.sendMessage(ChatColor.RED+"아이템을 먼저 선택 해 주세요!");
                     break;
                 }
                 if(!tradeableItem.setItemPrice(tradeableItem.getItemPrice()-10)){
-                    p.sendMessage("가격은 0보다 작을 수 없습니다.");
+                    p.sendMessage(ChatColor.RED+"가격은 0보다 작을 수 없습니다.");
                     alertNo(p);
                     break;
                 }
@@ -90,11 +95,11 @@ public class AddTradeItemGui extends GuiBase{
                 //아이템 가격 -1
                 if(!isUploaded){
                     alertNo(p);
-                    p.sendMessage("아이템을 먼저 선택 해 주세요!");
+                    p.sendMessage(ChatColor.RED+"아이템을 먼저 선택 해 주세요!");
                     break;
                 }
                 if(!tradeableItem.setItemPrice(tradeableItem.getItemPrice()-1)){
-                    p.sendMessage("가격은 0보다 작을 수 없습니다.");
+                    p.sendMessage(ChatColor.RED+"가격은 0보다 작을 수 없습니다.");
                     alertNo(p);
                     break;
                 }
@@ -105,11 +110,11 @@ public class AddTradeItemGui extends GuiBase{
                 //아이템 가격 +1
                 if(!isUploaded){
                     alertNo(p);
-                    p.sendMessage("아이템을 먼저 선택 해 주세요!");
+                    p.sendMessage(ChatColor.RED+"아이템을 먼저 선택 해 주세요!");
                     break;
                 }
                 if(!tradeableItem.setItemPrice(tradeableItem.getItemPrice()+1)){
-                    p.sendMessage("가격은 0보다 작을 수 없습니다.");
+                    p.sendMessage(ChatColor.RED+"가격은 0보다 작을 수 없습니다.");
                     alertNo(p);
                     break;
                 }
@@ -120,11 +125,11 @@ public class AddTradeItemGui extends GuiBase{
                 //아이템 가격 +10
                 if(!isUploaded){
                     alertNo(p);
-                    p.sendMessage("아이템을 먼저 선택 해 주세요!");
+                    p.sendMessage(ChatColor.RED+"아이템을 먼저 선택 해 주세요!");
                     break;
                 }
                 if(!tradeableItem.setItemPrice(tradeableItem.getItemPrice()+10)){
-                    p.sendMessage("가격은 0보다 작을 수 없습니다.");
+                    p.sendMessage(ChatColor.RED+"가격은 0보다 작을 수 없습니다.");
                     alertNo(p);
                     break;
                 }
@@ -133,17 +138,19 @@ public class AddTradeItemGui extends GuiBase{
                 break;
             case "zabon.tradeItem.addItem.confirm":
                 //아이템 리스트에 아이템 등록
+
+                tradeableItem.setUploadTime(getTime());
                 if(isUploaded) TradeItemList.addItem(tradeableItem.clone());
                 else{
                     alertNo(p);
-                    p.sendMessage("아이템을 먼저 선택 해 주세요!");
+                    p.sendMessage(ChatColor.RED+"아이템을 먼저 선택 해 주세요!");
                     break;
                 }
                 isUploaded = false;
-                p.sendMessage("아이템 등록 성공!");
+                p.sendMessage(ChatColor.GREEN+"아이템 등록 성공!");
                 alert(p, Sound.BLOCK_ANVIL_USE);
                 tradeableItem.reset();
-                updateItem();
+                resetItem();
                 break;
             default:
                 break;
@@ -171,5 +178,23 @@ public class AddTradeItemGui extends GuiBase{
 
     private void updateItem(){
         setItem(this.tradeableItem.getItem(),9*3+4, "zabon.tradeItem.addItem.showSelected");
+    }
+
+    private void resetItem(){
+        setItem("등록된 아이템", Arrays.asList("없음"), Material.STRUCTURE_VOID, 1, 9*3+4, "zabon.tradeItem.addItem.showSelected", false);
+    }
+
+    private String getTime(){
+        LocalDateTime now = LocalDateTime.now();
+
+        int year = now.getYear();
+        int monthValue = now.getMonthValue();
+        int dayOfMonth = now.getDayOfMonth();
+        int hour = now.getHour();
+        int minute = now.getMinute();
+        int second = now.getSecond();
+
+        return year+"년 "+monthValue+"월 "+dayOfMonth+"일 "+hour+"시 "+minute+"분 "+second+"초";
+
     }
 }
