@@ -11,6 +11,7 @@ import cucumbersaurus.zabon.eventListener.JoinEventListener;
 import cucumbersaurus.zabon.eventListener.QuitEventListener;
 import cucumbersaurus.zabon.zabon.ZabonGuiOpenCommand;
 import cucumbersaurus.zabon.zabon.bank.BankGuiOpenCommand;
+import cucumbersaurus.zabon.zabon.tradeItem.TradeItemList;
 import cucumbersaurus.zabon.zabon.tradeItem.addTradeIttem.AddTradeItemGuiCommand;
 import cucumbersaurus.zabon.zabon.tradeItem.tradeGui.TradeGuiCommand;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -27,6 +28,8 @@ public final class Zabon extends JavaPlugin {
         getCommands();
         registerEvents();
         //loadFile();
+        TradeItemList.setPlugin(this);
+        TradeItemList.ListToFile();
 
         getLogger().info("plugin enabled");
     }

@@ -14,31 +14,34 @@ import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Objects;
 
 public class AddTradeItemGui extends GuiBase{
 
     public static final HashMap<Player, Boolean> isWaitingAddItem = new HashMap<>();
+    public AddTradeItemGui(@NotNull Player p, int guiSize, String guiName) { super(p, guiSize, guiName); }
     public AddTradeItemGui(@NotNull Player p) { super(p, 54, "거래 가능한 이이템 추가하기"); }
     private final ItemStack item = new ItemStack(Material.STRUCTURE_VOID);
-    private final TradeableItem tradeableItem = new TradeableItem(item, 0, "null", "null", "null");
-    private boolean isUploaded = false;
+    protected final TradeableItem tradeableItem = new TradeableItem(item, 0, "null", "null", "null");
+    protected boolean isUploaded = false;
 
     @Override
     protected void init(@NotNull Player p) {
 
         for(int i = 0;i < 54;i++){
-            setItem(" ", null ,Material.WHITE_STAINED_GLASS_PANE,1, i,"zabon.background",false);
+            setItem(" ", null ,Material.WHITE_STAINED_GLASS_PANE,1, i,"zabon.tradeItem.addItem.background",false);
         }
 
-        setItem("아이템 등록", Arrays.asList("눌러서 인벤토리의 아이템 선택하기"), Material.GLOW_ITEM_FRAME, 1, 9+4, "zabon.tradeItem.addItem.setItem", false);
-        setItem("등록된 아이템", Arrays.asList("없음"), Material.STRUCTURE_VOID, 1, 9*3+4, "zabon.tradeItem.addItem.showSelected", false);
-        setItem("-10 데스", Arrays.asList("눌러서 아이템 판매가격 조정하기"), Material.RED_WOOL, 1, 9*4+2, "zabon.tradeItem.addItem.subtractPrice_10", false);
-        setItem("-1 데스", Arrays.asList("눌러서 아이템 판매가격 조정하기"), Material.RED_CARPET, 1, 9*4+3, "zabon.tradeItem.addItem.subtractPrice_1", false);
-        setItem("아이템 거래소에 등록하기", Arrays.asList("눌러서 바로 등록하기"), Material.ANVIL, 1, 9*4+4, "zabon.tradeItem.addItem.confirm", false);
-        setItem("+1 데스", Arrays.asList("눌러서 아이템 판매가격 조정하기"), Material.GREEN_CARPET, 1, 9*4+5, "zabon.tradeItem.addItem.addPrice_1", false);
-        setItem("+10 데스", Arrays.asList("눌러서 아이템 판매가격 조정하기"), Material.GREEN_WOOL, 1, 9*4+6, "zabon.tradeItem.addItem.addPrice_10", false);
+        setItem("아이템 등록", Collections.singletonList("눌러서 인벤토리의 아이템 선택하기"), Material.GLOW_ITEM_FRAME, 1, 9+4, "zabon.tradeItem.addItem.setItem", false);
+        setItem("등록된 아이템", Collections.singletonList("없음"), Material.STRUCTURE_VOID, 1, 9*3+4, "zabon.tradeItem.addItem.showSelected", false);
+        setItem("-10 데스", Collections.singletonList("눌러서 아이템 판매가격 조정하기"), Material.RED_WOOL, 1, 9*4+2, "zabon.tradeItem.addItem.subtractPrice_10", false);
+        setItem("-1 데스", Collections.singletonList("눌러서 아이템 판매가격 조정하기"), Material.RED_CARPET, 1, 9*4+3, "zabon.tradeItem.addItem.subtractPrice_1", false);
+        setItem("아이템 거래소에 등록하기", Collections.singletonList("눌러서 바로 등록하기"), Material.ANVIL, 1, 9*4+4, "zabon.tradeItem.addItem.confirm", true);
+        setItem("+1 데스", Collections.singletonList("눌러서 아이템 판매가격 조정하기"), Material.GREEN_CARPET, 1, 9*4+5, "zabon.tradeItem.addItem.addPrice_1", false);
+        setItem("+10 데스", Collections.singletonList("눌러서 아이템 판매가격 조정하기"), Material.GREEN_WOOL, 1, 9*4+6, "zabon.tradeItem.addItem.addPrice_10", false);
+
     }
 
     @Override
@@ -138,7 +141,6 @@ public class AddTradeItemGui extends GuiBase{
                 break;
             case "zabon.tradeItem.addItem.confirm":
                 //아이템 리스트에 아이템 등록
-
                 tradeableItem.setUploadTime(getTime());
                 if(isUploaded) TradeItemList.addItem(tradeableItem.clone());
                 else{
@@ -151,7 +153,7 @@ public class AddTradeItemGui extends GuiBase{
                 alert(p, Sound.BLOCK_ANVIL_USE);
                 tradeableItem.reset();
                 resetItem();
-                break;
+                //new ConfirmAddItemGui(p, this.tradeableItem);
             default:
                 break;
         }
@@ -164,27 +166,27 @@ public class AddTradeItemGui extends GuiBase{
         isWaitingAddItem.remove(e.getPlayer());
     }
 
-    private void alertYes(@NotNull Player p){
+    protected void alertYes(@NotNull Player p){
         p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
     }
 
-    private void alertNo(@NotNull Player p){
+    protected void alertNo(@NotNull Player p){
         p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_NO, 1, 1);
     }
 
-    private void alert(@NotNull Player p, Sound sound){
+    protected void alert(@NotNull Player p, Sound sound){
         p.playSound(p.getLocation(), sound, 1, 1);
     }
 
-    private void updateItem(){
+    protected void updateItem(){
         setItem(this.tradeableItem.getItem(),9*3+4, "zabon.tradeItem.addItem.showSelected");
     }
 
-    private void resetItem(){
+    protected void resetItem(){
         setItem("등록된 아이템", Arrays.asList("없음"), Material.STRUCTURE_VOID, 1, 9*3+4, "zabon.tradeItem.addItem.showSelected", false);
     }
 
-    private String getTime(){
+    protected String getTime(){
         LocalDateTime now = LocalDateTime.now();
 
         int year = now.getYear();

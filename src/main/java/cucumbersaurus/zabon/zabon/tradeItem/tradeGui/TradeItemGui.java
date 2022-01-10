@@ -10,6 +10,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 
 public class TradeItemGui extends GuiBase {
@@ -37,7 +38,7 @@ public class TradeItemGui extends GuiBase {
             setItem(" ",null,  Material.RED_STAINED_GLASS_PANE, 1, i, "zabon.tradeItem.background", false);
         }
 
-        setItem("장식 (만지지 마시오)", Arrays.asList("아니 만지지 말라니까"), Material.CLOCK, 1, 4, "zabon.tradeItem.easterEgg", false);
+        setItem("장식 (만지지 마시오)", Collections.singletonList("아니 만지지 말라니까"), Material.CLOCK, 1, 4, "zabon.tradeItem.easterEgg", false);
         setItem("현재 페이지/새로고침",Arrays.asList("현재 페이지를 나타냅니다.", "눌러서 새로고침"),  Material.YELLOW_STAINED_GLASS_PANE, page+1, 9*5+4, "zabon.tradeItem.reload", false);
 
         int lastPage =TradeItemList.itemList.size()/24;
