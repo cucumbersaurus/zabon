@@ -2,6 +2,7 @@ package cucumbersaurus.zabon.zabon.tradeItem.tradeGui;
 
 import cucumbersaurus.zabon.gui.GuiBase;
 import cucumbersaurus.zabon.zabon.tradeItem.TradeItemList;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -61,7 +62,7 @@ public class TradeItemGui extends GuiBase {
             int col = pn/7;
             int row = pn%7;
 
-            setItem(TradeItemList.getItem(i).getItem(), 9*(col+1) + row+1, "zabon.tradeItem.buyItem."+ i);
+            setItem(TradeItemList.getItem(i).getTradeableItem(), 9*(col+1) + row+1, "zabon.tradeItem.buyItem-"+ i);
         }
     }
 
@@ -99,6 +100,14 @@ public class TradeItemGui extends GuiBase {
                 break;
             default:
                 break;
+        }
+
+        if(btn.contains("zabon.tradeItem.buyItem-")){
+            Bukkit.broadcastMessage(Integer.toString(TradeItemList.itemList.size()));
+                p.getInventory().addItem(TradeItemList.itemList.get(Integer.parseInt(btn.split("-")[1])).getItem());
+                //p.getInventory().addItem(TradeItemList.itemList.get(TradeItemGui.onPage.get(p)*28+(e.getRawSlot()-1)/7+(e.getRawSlot()-1)%7-1).getItem());
+                //p.getInventory().addItem(e.getClickedInventory().getItem(e.getRawSlot()));
+
         }
 
     }

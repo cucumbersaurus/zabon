@@ -1,13 +1,13 @@
 package cucumbersaurus.zabon.zabon.tradeItem;
 
+import com.google.gson.Gson;
 import cucumbersaurus.zabon.Zabon;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.ItemStack;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Map;
 
 import static org.bukkit.Bukkit.getLogger;
 
@@ -33,6 +33,16 @@ public class TradeItemList {
         return itemList.get(index);
     }
 
+    public static void makeFile(){
+        if(!f.exists() || !f.isFile()){
+            try{
+                f.createNewFile();
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+        }
+    }
+
     public static void ListToFile() {
         Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
             @Override
@@ -40,7 +50,8 @@ public class TradeItemList {
                 try {
                     FileWriter writer = new FileWriter(f, false);
                     for (TradeableItem i : TradeItemList.itemList) {
-                        writer.write(i.getItem().toString() + "\n");
+                        String jsonStr = getJson(i);
+                        writer.write(jsonStr + "\n");
                     }
                     writer.flush();
                     getLogger().info("데이터 저장");
@@ -48,6 +59,38 @@ public class TradeItemList {
                     e.printStackTrace();
                 }
             }
-        }, 20 * 300, 20 * 300);
+        }, 20 * 10, 20 * 10);
     }
+
+    private static String getJson(TradeableItem item){
+        Gson gson = new Gson();
+        String jsonStr = gson.toJson(item.serialize());
+        //Bukkit.broadcastMessage(jsonStr);
+        return jsonStr;
+    }
+
+    public static void FileToList(){
+        Gson gson = new Gson();
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(f));
+            String fileLine;
+            while ((fileLine = reader.readLine())!=null){
+                Map map = gson.fromJson(fileLine, Map.class);
+                Bukkit.broadcastMessage(map.toString());
+                TradeableItem item = TradeableItem.deSerialize(map);
+                //ItemStack item = ItemStack.deserialize(map);
+                //List<String> lore = item.getLore();
+                //double price = Double.parseDouble(lore.get(0).substring(5).split("데")[0]);
+                //String uploadTime = lore.get(1).split(":")[1].substring(1);
+                //String lastingTime = lore.get(2).split(":")[1].substring(1);
+                //String playerName = lore.get(3).split(":")[1].substring(1);
+
+                //TradeableItem tradeableItem = new TradeableItem(item, 0, "null", "null", "null");
+                itemList.add(item);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

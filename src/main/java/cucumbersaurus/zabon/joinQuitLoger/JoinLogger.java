@@ -90,6 +90,7 @@ public class JoinLogger {
     }
 
      public void joinDefault(@NotNull PlayerJoinEvent e){
+         int rd=getRandom(1);
          e.setJoinMessage(ChatColor.YELLOW+"훌륭한 노동력인 "+ChatColor.DARK_GREEN+e.getPlayer().getName()+ChatColor.YELLOW+"(이)가 서버에 등장했습니다!");
          alertJoin();
     }

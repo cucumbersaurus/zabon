@@ -25,8 +25,8 @@ commands:
     usage: /add
     permission: zabon.add
   playerlocation:
-    usage: /playerlocation,/pl
-    aliases: [prl]
+    usage: /playerlocation,/prl
+    aliases: [prl, ㅔ기]
     permission: zabon.playerlocation
   zabon:
     description: 재산 관리 창 열기
@@ -57,9 +57,4 @@ permissions:
   zabon.playerlocation:
     default: true
   zabon.system.*:
-    default: true
-    children:
-      zabon.system.zabon: true
-      zabon.system.bank: true
-      zabon.system.trade: true
-      zabon.system.additem: true
+    default: op

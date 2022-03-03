@@ -14,7 +14,7 @@ public class QuitLogger {
 
     private int getRandom(int max){
         int rd = random.nextInt();
-        rd %= 5;
+        rd %= max;
         rd = rd < 0 ? rd * -1 : rd;
         return rd + 1;
     }
@@ -35,38 +35,75 @@ public class QuitLogger {
     }
 
     public void quitCucumber(@NotNull PlayerQuitEvent e){
-        e.setQuitMessage(ChatColor.YELLOW+"위대한 "+ChatColor.GREEN+"오이사우르스"+ChatColor.YELLOW+"가 바람과 함께 사라졌습니다.");
-
         Player p = e.getPlayer();
-        if(IsInLava(p)) e.setQuitMessage(ChatColor.GREEN+"오이사우르스"+inLavaMessage);
-
+        if(IsInLava(p)){
+            e.setQuitMessage(ChatColor.GREEN+"오이사우르스"+inLavaMessage);
+            alertQuit();
+            return;
+        }
+        int rd=getRandom(1);
+        switch (rd){
+            case 0:
+                e.setQuitMessage(ChatColor.YELLOW+"위대한 "+ChatColor.GREEN+"오이사우르스"+ChatColor.YELLOW+"가 바람과 함께 사라졌습니다.");
+                break;
+            default:
+                break;
+        }
         alertQuit();
     }
 
     public void quitAndesite(@NotNull PlayerQuitEvent e){
-        e.setQuitMessage(ChatColor.GOLD+"데스"+ChatColor.YELLOW+"가 \"데스는 데스데스\"를 시전하며 퇴장했습니다.");
-
         Player p = e.getPlayer();
-        if(IsInLava(p)) e.setQuitMessage(ChatColor.GOLD+"데스"+inLavaMessage);
-
+        if(IsInLava(p)) {
+            e.setQuitMessage(ChatColor.GOLD+"데스"+inLavaMessage);
+            alertQuit();
+            return;
+        }
+        int rd=getRandom(1);
+        switch (rd){
+            case 0:
+                e.setQuitMessage(ChatColor.GOLD+"데스"+ChatColor.YELLOW+"가 \"데스는 데스데스\"를 시전하며 퇴장했습니다.");
+                break;
+            default:
+                break;
+        }
         alertQuit();
     }
 
     public void quitSeo_m(@NotNull PlayerQuitEvent e){
-        e.setQuitMessage(ChatColor.YELLOW+"마이크 귀찮아서 안들고온 "+ChatColor.AQUA+"서엠"+ChatColor.YELLOW+"이 서버에서 퇴장하였습니다.");
-
         Player p = e.getPlayer();
-        if(IsInLava(p)) e.setQuitMessage(ChatColor.AQUA+"서엠"+inLavaMessage);
+        if(IsInLava(p)) {
+            e.setQuitMessage(ChatColor.AQUA+"서엠"+inLavaMessage);
+            alertQuit();
+            return;
+        }
+        int rd=getRandom(1);
+        switch (rd){
+            case 0:
+                e.setQuitMessage(ChatColor.YELLOW+"마이크 귀찮아서 안들고온 "+ChatColor.AQUA+"서엠"+ChatColor.YELLOW+"이 서버에서 퇴장하였습니다.");
+                break;
+            default:
+                break;
+        }
 
         alertQuit();
     }
 
     public void quitDefault(@NotNull PlayerQuitEvent e){
-        e.setQuitMessage(ChatColor.DARK_GREEN+e.getPlayer().getName()+ChatColor.YELLOW+"(이)가 탈주했습니다!");
-
         Player p = e.getPlayer();
-        if(IsInLava(p)) e.setQuitMessage(ChatColor.DARK_GREEN+e.getPlayer().getName()+inLavaMessage);
-
+        if(IsInLava(p)) {
+            e.setQuitMessage(ChatColor.DARK_GREEN+e.getPlayer().getName()+inLavaMessage);
+            alertQuit();
+            return;
+        }
+        int rd=getRandom(1);
+        switch (rd){
+            case 0:
+                e.setQuitMessage(ChatColor.DARK_GREEN+e.getPlayer().getName()+ChatColor.YELLOW+"(이)가 탈주했습니다!");
+                break;
+            default:
+                break;
+        }
         alertQuit();
     }
 

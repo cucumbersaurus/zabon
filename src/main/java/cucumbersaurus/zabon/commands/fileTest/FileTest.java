@@ -53,7 +53,7 @@ public class FileTest {
     public static void fileToMap(File f, HashMap<UUID, Integer> map){
         try{
             BufferedReader reader = new BufferedReader(new FileReader(f));
-            String fileLine = null;
+            String fileLine;
             while ((fileLine = reader.readLine())!=null){
 
                 UUID uuid = UUID.fromString(fileLine.split("=")[0]);

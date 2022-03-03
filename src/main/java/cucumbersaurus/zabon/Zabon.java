@@ -28,6 +28,8 @@ public final class Zabon extends JavaPlugin {
         getCommands();
         registerEvents();
         //loadFile();
+        TradeItemList.makeFile();
+        TradeItemList.FileToList();
         TradeItemList.setPlugin(this);
         TradeItemList.ListToFile();
 
@@ -37,7 +39,7 @@ public final class Zabon extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
-        saveFile();
+        //saveFile();
         getLogger().info("plugin disabled");
     }
 

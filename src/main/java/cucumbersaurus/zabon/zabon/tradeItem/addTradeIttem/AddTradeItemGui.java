@@ -179,7 +179,7 @@ public class AddTradeItemGui extends GuiBase{
     }
 
     protected void updateItem(){
-        setItem(this.tradeableItem.getItem(),9*3+4, "zabon.tradeItem.addItem.showSelected");
+        setItem(this.tradeableItem.getTradeableItem(),9*3+4, "zabon.tradeItem.addItem.showSelected");
     }
 
     protected void resetItem(){
